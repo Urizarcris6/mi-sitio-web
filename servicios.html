@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - Nutriólogo Cristian Urizar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; 
+        }
+        .mobile-menu-active {
+            display: block !important;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        /* Estilos para las tarjetas de servicio */
+        .service-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); 
+            padding: 0; /* Removido padding para que la imagen ocupe todo el ancho superior */
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden; /* Para asegurar que los bordes redondeados se apliquen a la imagen */
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        .service-card-image {
+            width: 100%;
+            height: 200px; /* Altura fija para las imágenes de las tarjetas, ajustar según necesidad */
+            object-fit: cover; /* Cubre el área sin distorsionar, puede recortar */
+            display: block;
+        }
+        .service-card-content {
+            padding: 2rem; /* Padding aplicado al contenido, no a la tarjeta completa */
+        }
+        .service-card h3 {
+            font-size: 1.75rem; 
+            font-weight: 700;
+            color: #1f2937; 
+            margin-bottom: 0.75rem; 
+        }
+        .service-card .icon-container { /* El contenedor de íconos se mantiene si se decide usarlo junto a la imagen o en lugar de ella */
+            background-color: #d1fae5; 
+            color: #047857; 
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem; 
+        }
+        .service-card .icon-container svg {
+            width: 32px; 
+            height: 32px; 
+        }
+        .service-card p, .service-card ul {
+            color: #4b5563; 
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .service-card ul {
+            list-style-type: disc;
+            margin-left: 1.25rem; 
+            margin-top: 0.75rem; 
+        }
+        .service-card li {
+            margin-bottom: 0.35rem; 
+        }
+        .service-card .sub-headline {
+            font-size: 1rem;
+            color: #374151; 
+            margin-bottom: 1rem; 
+            font-style: italic;
+        }
+
+        /* Estilos del botón de WhatsApp */
+        .whatsapp-float {
+            position: fixed; 
+            width: 60px;   
+            height: 60px;   
+            bottom: 40px;   
+            right: 40px;    
+            background-color: #25D366; 
+            color: #FFF;    
+            border-radius: 50%; 
+            text-align: center;
+            font-size: 30px; 
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.3); 
+            z-index: 100;   
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1); 
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.4); 
+        }
+        .whatsapp-icon {
+            width: 32px;  
+            height: 32px; 
+            fill: white; 
+        }
+        @media (max-width: 768px) {
+            .service-card-image {
+                height: 180px; /* Altura ajustada para móviles */
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .whatsapp-icon {
+                width: 28px;
+                height: 28px;
+            }
+            .service-card h3 {
+                font-size: 1.5rem; 
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-green-600">Nut. Cristian</a>
+
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="index.html" class="text-gray-600 hover:text-green-600 transition duration-300">Inicio</a>
+                <a href="servicios.html" class="text-green-600 font-semibold hover:text-green-700 transition duration-300">Servicios</a> 
+                <a href="sobre-mi.html" class="text-gray-600 hover:text-green-600 transition duration-300">Sobre Mí</a>
+                <a href="calculadora.html" class="text-gray-600 hover:text-green-600 transition duration-300">Calculadora IMC</a> 
+                <a href="https://wa.link/a5i020" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-full transition duration-300 shadow">Reservar Consulta</a>
+            </div>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-white py-2 mobile-menu-active:block">
+             <a href="index.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Inicio</a>
+             <a href="servicios.html" class="block px-6 py-2 text-green-600 font-semibold hover:bg-green-100 transition duration-300">Servicios</a> 
+             <a href="sobre-mi.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Sobre Mí</a>
+             <a href="calculadora.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Calculadora IMC</a>
+             <a href="https://wa.link/s9av0m" class="block px-6 py-3 bg-green-500 text-white text-center font-medium rounded-md mx-4 my-2 hover:bg-green-600 transition duration-300 shadow">Reservar Consulta</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-gradient-to-r from-green-50 to-teal-50 py-16 md:py-24 px-6 text-center">
+            <div class="container mx-auto">
+                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight fade-in">Descubre Nuestros Servicios de Nutrición</h1>
+                 <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto fade-in" style="transition-delay: 0.2s;">Encuentra el plan perfecto para ti y empieza a construir hábitos saludables hoy mismo.</p>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 px-6 bg-gray-50">
+            <div class="container mx-auto">
+                <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-green-600 mb-4 fade-in">¿Cansado/a de Dietas que No Funcionan?</h2>
+                    <p class="text-xl text-gray-700 fade-in" style="transition-delay: 0.1s;">Tu Éxito, Paso a Paso: Así Transformaremos Tu Salud Juntos</p>
+                </div>
+
+                <div class="max-w-5xl mx-auto"> 
+                    <div class="space-y-10 md:space-y-12">
+                        <div class="service-card fade-in" style="transition-delay: 0.2s;">
+                            <img src="Imagenes/App de nutrición.jpeg" 
+                                 alt="[Imagen representativa de planes personalizados y app de nutrición]" 
+                                 class="service-card-image">
+                            <div class="service-card-content">
+                                <div class="icon-container mx-auto md:mx-0"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                                    </svg>                              
+                                </div>
+                                <h3>Planes Personalizados y App de Nutrición</h3>
+                                <p class="mb-4">Todo integrado y fácil de usar desde nuestra app de nutrición, diseñada para acompañarte en cada paso de tu transformación.</p>
+                                <strong class="block mb-2 text-gray-700">Qué incluye:</strong>
+                                <ul>
+                                    <li>App de nutrición disponible para Android e iOS.</li>
+                                    <li>Acceso individual y exclusivo a tu perfil en la app.</li>
+                                    <li>Planes de alimentación personalizados, visuales y fáciles de seguir.</li>
+                                    <li>Acceso a sesiones en vivo de actividad física y psicología directamente desde la app.</li>
+                                    <li>Monitoriza tus avances: peso, % de grasa, % de músculo, circunferencia de cintura y cadera.</li>
+                                    <li>Comparte fotos de tus alimentos con tu nutriólogo a través de la app para un seguimiento cercano.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="service-card fade-in" style="transition-delay: 0.3s;">
+                            <img src="https://placehold.co/800x400/1ABC9C/FFFFFF?text=Activaci%C3%B3n+Funcional" 
+                                 alt="[Imagen representativa de activación funcional]" 
+                                 class="service-card-image">
+                            <div class="service-card-content">
+                                <div class="icon-container mx-auto md:mx-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.287 8.287 0 0 0 3-2.553A8.252 8.252 0 0 1 15.362 5.214Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 9.75A8.25 8.25 0 0 1 12 4.5v12A8.25 8.25 0 0 1 4.5 9.75Z" />
+                                    </svg>                              
+                                </div>
+                                <h3>Sesiones en Vivo de Activación Funcional</h3>
+                                <p class="sub-headline">Quema calorías, aumenta tu fuerza y mejora tu condición física desde la comodidad de tu casa.</p>
+                                <strong class="block mb-2 text-gray-700">Qué incluye:</strong>
+                                <ul>
+                                    <li>7 sesiones variadas por día, de lunes a viernes, para adaptarse a tu horario.</li>
+                                    <li>Acceso a las sesiones en vivo directamente desde tu app de nutrición.</li>
+                                    <li>Gasto calórico aproximado de 300 kcal en solo 30 minutos por sesión.</li>
+                                    <li>Dirigido por entrenadores con certificaciones especializadas en control de peso y acondicionamiento físico.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="service-card fade-in" style="transition-delay: 0.4s;">
+                            <img src="https://placehold.co/800x400/3498DB/FFFFFF?text=Motivaci%C3%B3n+Psicol%C3%B3gica" 
+                                 alt="[Imagen representativa de motivación psicológica]" 
+                                 class="service-card-image">
+                            <div class="service-card-content">
+                                <div class="icon-container mx-auto md:mx-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L21 5.25l-.813 2.846a4.5 4.5 0 0 0-3.09 3.09L14.25 12l2.846.813a4.5 4.5 0 0 0 3.09 3.09L21 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L14.25 12Z" />
+                                    </svg>                              
+                                </div>
+                                <h3>Sesiones de Motivación Psicológica</h3>
+                                <p class="sub-headline">Aumenta tu determinación y mantén el enfoque para lograr tus objetivos con el apoyo de una psicóloga especialista en psicología de la alimentación.</p>
+                                <strong class="block mb-2 text-gray-700">Qué incluye:</strong>
+                                <ul>
+                                    <li>Sesiones grupales en vivo accesibles desde tu app de nutrición.</li>
+                                    <li>3 sesiones por día, de lunes a viernes, para reforzar tu compromiso.</li>
+                                    <li>Guiadas por una psicóloga con enfoque en alimentación y estrategias para el control de peso.</li>
+                                    <li>Un espacio para mantenerte motivado(a) y superar obstáculos durante todo tu proceso.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 px-6 bg-gradient-to-r from-green-500 to-teal-600 text-white text-center">
+            <div class="container mx-auto fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Tienes Preguntas o Quieres Empezar?</h2>
+                <p class="text-lg md:text-xl mb-8 max-w-xl mx-auto">No dudes en contactarme para resolver tus dudas o para reservar tu primera consulta. ¡Estoy aquí para ayudarte!</p>
+                <a href="https://wa.link/a5i020" class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg transform hover:scale-105">Contactar Ahora</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-10 px-6">
+        <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
+            <p class="text-sm mb-4 md:mb-0">&copy; 2025 Cristian Urizar. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-4">
+            <a href="https://www.facebook.com/people/Nutriologo-Cristian-Urizar/100072225924082/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">Facebook</a>                <a href="#" class="hover:text-white transition duration-300" aria-label="Instagram">Instagram</a>
+                <a href="#" class="hover:text-white transition duration-300" aria-label="LinkedIn">LinkedIn</a>
+            </div>
+            <div class="mt-4 md:mt-0 text-sm">
+                 <a href="#" class="hover:text-white transition duration-300 mr-4">Política de Privacidad</a>
+                 <a href="#" class="hover:text-white transition duration-300">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menú Móvil Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        });
+
+        // Cerrar menú móvil al hacer clic en un enlace
+         mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!link.target || link.target === '_self') {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuButton.querySelector('svg');
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
+                }
+            });
+        });
+
+        // Animación Fade-in al hacer scroll
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        };
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        fadeInElements.forEach(el => { observer.observe(el); });
+    </script>
+
+<a href="https://wa.link/a5i020" target="_blank" rel="noopener noreferrer"
+   class="whatsapp-float"
+   aria-label="Contactar por WhatsApp"
+   title="Contactar por WhatsApp">  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="whatsapp-icon" role="img" aria-hidden="true" focusable="false"> <path fill="currentColor" fill-rule="evenodd" d="M16.002 0a16 16 0 0 0-16 16c0 3.09.88 6 2.459 8.519l-2.491 6.03 6.269-2.434a15.93 15.93 0 0 0 7.76 1.885h.004a16 16 0 1 0-16-16zm7.995 23.213c-.398-.2-2.362-1.164-2.728-1.297-.366-.133-.633-.2-.9.2-.266.399-1.03 1.297-1.264 1.563-.234.266-.468.3-.867.1-.398-.2-1.686-.62-3.21-1.977-1.186-1.057-1.977-2.362-2.21-2.761-.234-.399-.025-.612.174-.811.175-.174.399-.467.598-.7.2-.233.266-.399.399-.665.133-.266.067-.5-.033-.7-.1-.2-1.03-2.495-1.429-3.422-.374-.895-.754-.772-.9-.787-.145-.015-.313-.015-.48-.015-.167 0-.433.067-.667.332-.233.266-.895.868-1.129 2.109-.234 1.242.167 2.597.334 2.83.166.234 1.494 2.495 3.619 4.491 2.125 1.996 2.83 2.261 3.793 2.56 1.19.374 1.978.3 2.495.166.574-.15 1.712-.7 1.946-1.364.234-.665.234-1.23.167-1.364-.067-.133-.234-.2-.5-.399z"></path>
+    </svg>
+</a>
+
+</body>
+</html>

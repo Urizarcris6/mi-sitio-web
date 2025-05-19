@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora IMC- Nutriologo Cristian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .mobile-menu-active {
+            display: block !important;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+        
+        .calculator-container {
+            background-color: white;
+            padding: 2rem; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+            width: 100%;
+            max-width: 500px; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        .input-group {
+            margin-bottom: 1.5rem; 
+        }
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500; 
+            color: #374151; 
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem; 
+            border: 1px solid #d1d5db; 
+            border-radius: 8px; 
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #10b981; 
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); 
+        }
+        .calculate-button {
+            width: 100%;
+            padding: 0.875rem 1.5rem; 
+            background-color: #10b981; 
+            color: white;
+            font-weight: 600; 
+            border: none;
+            border-radius: 8px; 
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calculate-button:hover {
+            background-color: #059669; 
+        }
+        .result-section {
+            margin-top: 2rem; 
+            text-align: center;
+        }
+        .bmi-value {
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            color: #1f2937; 
+            margin-bottom: 0.5rem;
+        }
+        .bmi-category {
+            font-size: 1.125rem; 
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .text-underweight-600 { color: #D97706; } 
+        .text-normal-600 { color: #059669; }     
+        .text-overweight-600 { color: #EA580C; }  
+        .text-obesity-600 { color: #DC2626; }    
+
+        .bmi-bar-container {
+            width: 100%;
+            height: 30px; 
+            background-color: #e5e7eb; 
+            border-radius: 15px; 
+            overflow: hidden;
+            position: relative;
+        }
+        .bmi-bar {
+            height: 100%;
+            width: 0%; 
+            border-radius: 15px;
+            transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        .bg-underweight { background-color: #facc15; } 
+        .bg-normal { background-color: #4ade80; }     
+        .bg-overweight { background-color: #fb923c; }  
+        .bg-obesity { background-color: #f87171; }    
+
+        .error-message {
+            color: #ef4444; 
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            text-align: left;
+        }
+        .hidden {
+            display: none;
+        }
+
+        .whatsapp-float {
+            position: fixed; 
+            width: 60px;   
+            height: 60px;   
+            bottom: 40px;   
+            right: 40px;    
+            background-color: #25D366; 
+            color: #FFF;    
+            border-radius: 50%; 
+            text-align: center;
+            font-size: 30px; 
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.3); 
+            z-index: 100;   
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1); 
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.4); 
+        }
+        .whatsapp-icon {
+            width: 32px;  
+            height: 32px; 
+            fill: white; 
+        }
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .whatsapp-icon {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        /* Estilos para la sección de explicación del IMC */
+        .imc-explanation-container {
+            margin-top: 2.5rem; /* Espacio sobre la explicación */
+            padding: 1.5rem;
+            background-color: #f9fafb; /* Un fondo ligeramente diferente para destacar */
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+        .imc-explanation-container h3 {
+            font-size: 1.5rem; /* Tamaño del título de la explicación */
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .imc-explanation-container p {
+            font-size: 0.95rem; /* Tamaño del texto de la explicación */
+            line-height: 1.6;
+            color: #4b5563; /* Color de texto gris oscuro */
+            margin-bottom: 0.75rem;
+        }
+        .imc-explanation-container strong {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .imc-explanation-container ul {
+            list-style-type: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .imc-explanation-container li {
+            margin-bottom: 0.5rem;
+        }
+        .imc-disclaimer {
+            font-size: 0.875rem;
+            color: #6b7280; /* Color de texto gris medio */
+            text-align: center;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="Index.html" class="text-2xl font-bold text-green-600">Nut. Cristian</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="Index.html" class="text-gray-600 hover:text-green-600 transition duration-300">Inicio</a>
+                <a href="servicios.html" class="text-gray-600 hover:text-green-600 transition duration-300">Servicios</a>
+                <a href="sobre-mi.html" class="text-gray-600 hover:text-green-600 transition duration-300">Sobre Mí</a>
+                <a href="calculadora.html" class="text-gray-600 hover:text-green-600 transition duration-300">Calculadora de IMC</a>
+                <a href="https://wa.link/a5i020" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-full transition duration-300 shadow">Reservar Consulta</a>
+            </div>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-white py-2 mobile-menu-active:block">
+             <a href="Index.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Inicio</a>
+             <a href="servicios.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Servicios</a>
+             <a href="sobre-mi.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Sobre Mí</a>
+             <a href="calculadora.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Calculadora de IMC</a>
+             <a href="https://wa.link/s9av0m" class="block px-6 py-3 bg-green-500 text-white text-center font-medium rounded-md mx-4 my-2 hover:bg-green-600 transition duration-300 shadow">Reservar Consulta</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-gradient-to-r from-green-50 to-teal-50 py-16 md:py-24 px-6 text-center">
+            <div class="container mx-auto">
+                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight fade-in">Calcula tu Índice de Masa Corporal (IMC)</h1>
+                 <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto fade-in" style="transition-delay: 0.2s;">Utiliza nuestra herramienta para conocer tu IMC y obtener una indicación de tu estado nutricional de forma rápida y sencilla.</p>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 px-6 bg-white">
+            <div class="container mx-auto">
+                <div class="max-w-2xl mx-auto"> 
+                    <div class="calculator-container">
+                        <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Ingresa tus datos</h2>
+                
+                        <div class="input-group">
+                            <label for="weight" class="input-label">Peso (kg):</label>
+                            <input type="number" id="weight" class="input-field" placeholder="Ej: 70">
+                            <p id="weightError" class="error-message hidden">Por favor, ingrese un peso válido.</p>
+                        </div>
+                
+                        <div class="input-group">
+                            <label for="height" class="input-label">Altura (cm):</label>
+                            <input type="number" id="height" class="input-field" placeholder="Ej: 175">
+                            <p id="heightError" class="error-message hidden">Por favor, ingrese una altura válida.</p>
+                        </div>
+                
+                        <button id="calculateBtn" class="calculate-button">Calcular IMC</button>
+                
+                        <div id="resultSection" class="result-section hidden">
+                            <p class="bmi-value" id="bmiValue">--</p>
+                            <p class="bmi-category" id="bmiCategoryText">--</p>
+                            <div class="bmi-bar-container">
+                                <div id="bmiBar" class="bmi-bar">
+                                    <span id="bmiBarText"></span>
+                                </div>
+                            </div>
+                             <div class="mt-6 text-sm text-gray-600">
+                                <p><strong>Interpretación de los resultados del IMC (Referencia rápida):</strong></p>
+                                <ul class="list-disc list-inside text-left ml-4 mt-2 space-y-1">
+                                    <li><span class="font-semibold text-yellow-500">Amarillo (Delgadez):</span> IMC menor a 18.5</li>
+                                    <li><span class="font-semibold text-green-500">Verde (Normal):</span> IMC entre 18.5 y 24.9</li>
+                                    <li><span class="font-semibold text-orange-500">Naranja (Sobrepeso):</span> IMC entre 25 y 29.9</li>
+                                    <li><span class="font-semibold text-red-500">Rojo (Obesidad):</span> IMC de 30 o mayor</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="imc-explanation-container">
+                        <h3>¿Qué significa tu resultado de IMC?</h3>
+                        <p>El Índice de Masa Corporal (IMC) es una medida que relaciona el peso y la altura de una persona para estimar su grasa corporal. Es una herramienta de detección útil, pero no diagnostica la grasa corporal o la salud de un individuo directamente.</p>
+                        
+                        <p>A continuación, se describen las categorías generales del IMC para adultos:</p>
+                        <ul>
+                            <li><strong>Delgadez (IMC < 18.5):</strong> Un IMC por debajo de 18.5 puede indicar que tienes un peso inferior al saludable. Esto podría estar asociado a ciertos riesgos para la salud y es recomendable consultar a un profesional para evaluar tu estado nutricional.</li>
+                            <li><strong>Peso Normal (IMC 18.5 – 24.9):</strong> Este rango se considera saludable para la mayoría de los adultos. Mantener un IMC dentro de esta categoría generalmente se asocia con menores riesgos de enfermedades crónicas.</li>
+                            <li><strong>Sobrepeso (IMC 25 – 29.9):</strong> Un IMC en este rango indica un exceso de peso corporal en relación con la altura. El sobrepeso puede aumentar el riesgo de desarrollar ciertas enfermedades, como diabetes tipo 2, enfermedades cardíacas y presión arterial alta.</li>
+                            <li><strong>Obesidad (IMC ≥ 30):</strong> La obesidad se clasifica en diferentes grados (Clase I, II y III) y se asocia con un riesgo significativamente mayor de problemas de salud graves. Es importante buscar asesoramiento profesional para manejar esta condición.</li>
+                        </ul>
+                        <p><strong>Importante:</strong> El IMC tiene limitaciones. No distingue entre masa grasa y masa muscular (por ejemplo, atletas con mucha masa muscular pueden tener un IMC alto sin tener exceso de grasa). Tampoco considera la distribución de la grasa corporal, la edad, el sexo o la etnia, factores que también influyen en la salud.</p>
+                        <p class="imc-disclaimer">Esta calculadora y la información proporcionada son solo para fines orientativos. Consulta siempre a un nutriólogo o profesional de la salud para una evaluación completa de tu estado de salud y recomendaciones personalizadas.</p>
+                    </div>
+                    </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 px-6 bg-gradient-to-r from-green-500 to-teal-600 text-white text-center">
+            <div class="container mx-auto fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Tienes Preguntas o Quieres Empezar?</h2>
+                <p class="text-lg md:text-xl mb-8 max-w-xl mx-auto">No dudes en contactarnos para resolver tus dudas o para reservar tu primera consulta. ¡Estamos aquí para ayudarte!</p>
+                <a href="https://wa.link/a5i020" class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg transform hover:scale-105">Contactar Ahora</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-10 px-6">
+        <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
+            <p class="text-sm mb-4 md:mb-0">&copy; 2025 Cristian Urizar. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://www.facebook.com/people/Nutriologo-Cristian-Urizar/100072225924082/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">Facebook</a>
+                <a href="#" class="hover:text-white transition duration-300">Instagram</a>
+                <a href="#" class="hover:text-white transition duration-300">LinkedIn</a>
+            </div>
+            <div class="mt-4 md:mt-0 text-sm">
+                 <a href="#" class="hover:text-white transition duration-300 mr-4">Política de Privacidad</a>
+                 <a href="#" class="hover:text-white transition duration-300">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const weightInput = document.getElementById('weight');
+        const heightInput = document.getElementById('height');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultSection = document.getElementById('resultSection');
+        const bmiValueDisplay = document.getElementById('bmiValue');
+        const bmiCategoryTextDisplay = document.getElementById('bmiCategoryText');
+        const bmiBar = document.getElementById('bmiBar');
+        const bmiBarText = document.getElementById('bmiBarText');
+        const weightError = document.getElementById('weightError');
+        const heightError = document.getElementById('heightError');
+
+        calculateBtn.addEventListener('click', () => {
+            weightError.classList.add('hidden');
+            heightError.classList.add('hidden');
+            resultSection.classList.add('hidden'); 
+
+            const weight = parseFloat(weightInput.value);
+            const height = parseFloat(heightInput.value);
+            let isValid = true;
+
+            if (isNaN(weight) || weight <= 0 || weight > 500) {
+                weightError.textContent = 'Por favor, ingrese un peso válido (ej: 5 - 500 kg).';
+                weightError.classList.remove('hidden');
+                isValid = false;
+            }
+
+            if (isNaN(height) || height <= 50 || height > 300) {
+                heightError.textContent = 'Por favor, ingrese una altura válida (ej: 50 - 300 cm).';
+                heightError.classList.remove('hidden');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                return; 
+            }
+
+            const heightInMeters = height / 100;
+            const bmi = weight / (heightInMeters * heightInMeters);
+            const bmiRounded = bmi.toFixed(1); 
+
+            bmiValueDisplay.textContent = bmiRounded;
+
+            let category = '';
+            let barColorClass = ''; 
+            let textColorClassSuffix = ''; 
+            let barWidthPercentage = 0;
+
+            if (bmi < 18.5) {
+                category = 'Delgadez';
+                barColorClass = 'bg-underweight'; 
+                textColorClassSuffix = 'underweight';
+                barWidthPercentage = (bmi / 18.5) * 25; 
+                if (bmi < 10) barWidthPercentage = 5; 
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                category = 'Peso Normal';
+                barColorClass = 'bg-normal';
+                textColorClassSuffix = 'normal';
+                barWidthPercentage = 25 + ((bmi - 18.5) / (24.9 - 18.5)) * 25; 
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                category = 'Sobrepeso';
+                barColorClass = 'bg-overweight';
+                textColorClassSuffix = 'overweight';
+                barWidthPercentage = 50 + ((bmi - 25) / (29.9 - 25)) * 25; 
+            } else { 
+                category = 'Obesidad';
+                barColorClass = 'bg-obesity';
+                textColorClassSuffix = 'obesity';
+                barWidthPercentage = 75 + Math.min(((bmi - 30) / (40 - 30)) * 25, 25); 
+            }
+            barWidthPercentage = Math.max(5, Math.min(100, barWidthPercentage)); 
+
+            bmiCategoryTextDisplay.textContent = category;
+            bmiCategoryTextDisplay.className = `bmi-category font-semibold text-${textColorClassSuffix}-600`;
+
+            bmiBar.className = 'bmi-bar'; 
+            bmiBar.classList.add(barColorClass);
+            bmiBar.style.width = `${barWidthPercentage}%`;
+
+            if (barWidthPercentage > 20) { 
+                 bmiBarText.textContent = `${bmiRounded} - ${category}`;
+            } else {
+                 bmiBarText.textContent = '';
+            }
+
+            resultSection.classList.remove('hidden');
+        });
+
+        weightInput.addEventListener('input', () => weightError.classList.add('hidden'));
+        heightInput.addEventListener('input', () => heightError.classList.add('hidden'));
+    </script>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        });
+
+         mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!link.target || link.target === '_self') {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuButton.querySelector('svg');
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
+                }
+            });
+        });
+
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        fadeInElements.forEach(el => { observer.observe(el); });
+    </script>
+
+<a href="https://wa.link/a5i020" target="_blank" rel="noopener noreferrer"
+   class="whatsapp-float"
+   aria-label="Contactar por WhatsApp"
+   title="Contactar por WhatsApp">  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="whatsapp-icon" role="img" aria-hidden="true" focusable="false"> <path fill="currentColor" fill-rule="evenodd" d="M16.002 0a16 16 0 0 0-16 16c0 3.09.88 6 2.459 8.519l-2.491 6.03 6.269-2.434a15.93 15.93 0 0 0 7.76 1.885h.004a16 16 0 1 0-16-16zm7.995 23.213c-.398-.2-2.362-1.164-2.728-1.297-.366-.133-.633-.2-.9.2-.266.399-1.03 1.297-1.264 1.563-.234.266-.468.3-.867.1-.398-.2-1.686-.62-3.21-1.977-1.186-1.057-1.977-2.362-2.21-2.761-.234-.399-.025-.612.174-.811.175-.174.399-.467.598-.7.2-.233.266-.399.399-.665.133-.266.067-.5-.033-.7-.1-.2-1.03-2.495-1.429-3.422-.374-.895-.754-.772-.9-.787-.145-.015-.313-.015-.48-.015-.167 0-.433.067-.667.332-.233.266-.895.868-1.129 2.109-.234 1.242.167 2.597.334 2.83.166.234 1.494 2.495 3.619 4.491 2.125 1.996 2.83 2.261 3.793 2.56 1.19.374 1.978.3 2.495.166.574-.15 1.712-.7 1.946-1.364.234-.665.234-1.23.167-1.364-.067-.133-.234-.2-.5-.399z"></path>
+    </svg>
+</a>
+
+</body>
+</html>

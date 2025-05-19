@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí - Nutriólogo Cristian Urizar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilo para el menú móvil activo */
+        .mobile-menu-active {
+            display: block !important;
+        }
+        /* Transiciones suaves */
+        html {
+            scroll-behavior: smooth;
+        }
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+        }
+
+
+.whatsapp-float {
+  position: fixed; /* Se queda fijo en la pantalla */
+  width: 60px;     /* Ancho del botón */
+  height: 60px;    /* Alto del botón */
+  bottom: 40px;    /* Distancia desde abajo */
+  right: 40px;     /* Distancia desde la derecha */
+  background-color: #25D366; /* Color verde de WhatsApp */
+  color: #FFF;     /* Color del icono (blanco) */
+  border-radius: 50%; /* Lo hace circular */
+  text-align: center;
+  font-size: 30px; /* Tamaño del icono interno (ajustado por SVG viewBox) */
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.3); /* Sombra suave */
+  z-index: 100;    /* Asegura que esté por encima de otros elementos */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+  display: flex; /* Para centrar el icono SVG */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1); /* Agranda un poco al pasar el mouse */
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.4); /* Sombra más pronunciada */
+}
+
+.whatsapp-icon {
+  width: 32px;  /* Ancho del icono SVG */
+  height: 32px; /* Alto del icono SVG */
+  fill: white; /* Asegura que el SVG sea blanco */
+}
+
+/* Media Query para pantallas pequeñas (opcional) */
+@media (max-width: 768px) {
+  .whatsapp-float {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+  }
+  .whatsapp-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="Index.html" class="text-2xl font-bold text-green-600">Nut. Cristian</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="Index.html" class="text-gray-600 hover:text-green-600 transition duration-300">Inicio</a>
+                <a href="servicios.html" class="text-gray-600 hover:text-green-600 transition duration-300">Servicios</a>
+                <a href="sobre-mi.html" class="text-gray-600 hover:text-green-600 transition duration-300">Sobre Mí</a>
+                <a href="calculadora.html" class="text-gray-600 hover:text-green-600 transition duration-300">Calculadora de IMC</a>
+                <a href="https://wa.link/a5i020" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-full transition duration-300 shadow">Reservar Consulta</a>
+            </div>
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-white py-2 mobile-menu-active:block">
+             <a href="Index.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Inicio</a>
+             <a href="servicios.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Servicios</a>
+             <a href="sobre-mi.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Sobre Mí</a>
+             <a href="calculadora.html" class="block px-6 py-2 text-gray-600 hover:bg-green-50 transition duration-300">Calculadora de IMC</a>
+             <a href="https://wa.link/s9av0m" class="block px-6 py-3 bg-green-500 text-white text-center font-medium rounded-md mx-4 my-2 hover:bg-green-600 transition duration-300 shadow">Reservar Consulta</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="bg-gradient-to-r from-green-50 to-teal-50 py-16 md:py-24 px-6">
+            <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3 text-center md:text-left fade-in">
+                     <img src="Imagenes/Nutriologo-cristian.jpg" alt="[Foto profesional de [Tu Nombre]]" class="rounded-full shadow-xl mx-auto w-60 h-60 md:w-72 md:h-72 object-cover border-4 border-white" onerror="this.onerror=null; this.src='https://placehold.co/500x500/cccccc/ffffff?text=Error+imagen';">
+                </div>
+                <div class="md:w-2/3 text-center md:text-left fade-in" style="transition-delay: 0.2s;">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-3">¡Hola! Soy Cristian Urizar</h1>
+                    <p class="text-xl md:text-2xl text-green-700 font-medium mb-4">Tu Nutriólogo online</p>
+                    <p class="text-lg text-gray-600 mb-6 max-w-xl mx-auto md:mx-0">Apasionado por la ciencia de la nutrición y comprometido a ayudarte a construir una relación saludable y feliz con la comida para alcanzar tu máximo potencial de bienestar.</p>
+                    <a href="https://wa.link/a5i020" class="inline-block bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-6 rounded-full transition duration-300 shadow">Contacta Conmigo</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 px-6 bg-white">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 fade-in">Mi Filosofía de Nutrición</h2>
+                <p class="text-lg text-gray-600 mb-12 max-w-2xl mx-auto fade-in" style="transition-delay: 0.1s;">Creo en un enfoque equilibrado, sostenible y basado en la evidencia. Mi objetivo es empoderarte con el conocimiento y las herramientas para tomar decisiones alimentarias conscientes que nutran tu cuerpo y mente.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in" style="transition-delay: 0.2s;">
+                        <div class="mb-4 text-green-500">
+                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Sostenibilidad</h3>
+                        <p class="text-gray-600">Fomento hábitos alimentarios que puedas mantener a largo plazo, sin dietas restrictivas ni soluciones rápidas.</p>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in" style="transition-delay: 0.3s;">
+                        <div class="mb-4 text-green-500">
+                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Enfoque Holístico</h3>
+                        <p class="text-gray-600">Considero todos los aspectos de tu vida (estrés, sueño, actividad física) para un bienestar integral.</p>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300 fade-in" style="transition-delay: 0.4s;">
+                        <div class="mb-4 text-green-500">
+                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 14l9-5-9-5-9 5 9 5z"></path><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Base Científica</h3>
+                        <p class="text-gray-600">Mis recomendaciones se basan en la última evidencia científica, adaptada a tus necesidades individuales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 px-6 bg-green-50">
+            <div class="container mx-auto md:flex md:items-center md:gap-12">
+                <div class="md:w-1/2 mb-8 md:mb-0 fade-in">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Mi Formación y Experiencia</h2>
+                    <p class="text-gray-700 mb-4">Estoy comprometido/a con la formación continua para ofrecerte el mejor asesoramiento posible.</p>
+                    <ul class="list-disc list-inside text-gray-600 space-y-2 mb-6">
+                        <li><strong>Licenciatura en Nutrición</strong> por la Universidad Popular Autónoma del Estado de Puebla (UPAEP)</li>
+                        <li><strong>Diplomado en Retos y Desafíos de la Nutrición en el Siglo XXI</strong> por La UPAEP.</li>
+                        <li>Cédula Profesional: 13006988.</li>
+                        <li>Más de 3 años de experiencia ayudando a pacientes a transformar su salud, incluyendo prácticas profesionales en servicio de alimentos, comunitario, clínicas y consultas presenciales y online independiente.</li>
+                        <li>Experiencia en el manejo nutricional de diversas condiciones como diabetes, hipertensión arterial, dislipidemias (colesterol alto, trigliceridemia), sobrepeso y obesidad, así como en la atención a escolares y adolescentes.</li>
+                    </ul>
+                    <p class="text-gray-700">Mi pasión es traducir la ciencia de la nutrición en consejos prácticos y aplicables para tu día a día.</p>
+                </div>
+                <div class="md:w-1/2 text-center fade-in" style="transition-delay: 0.2s;">
+                     <img src="Imagenes/Cris.jpg" alt="[Imagen representativa de diplomas o entorno profesional]" class="rounded-lg shadow-md w-full max-w-md mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/600x450/cccccc/ffffff?text=Error+imagen';">
+                </div>
+            </div>
+        </section>
+
+         <section class="py-16 md:py-24 px-6 bg-white">
+            <div class="container mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 fade-in">Un Poco Más Sobre Mí</h2>
+                <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto fade-in" style="transition-delay: 0.1s;">Más allá de la nutrición, disfruto de...</p>
+                <div class="flex flex-wrap justify-center gap-6 md:gap-10 fade-in" style="transition-delay: 0.2s;">
+                    <div class="text-center p-4">
+                         <div class="bg-green-100 rounded-full p-4 inline-block mb-2 text-green-600">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                         </div>
+                         <p class="font-medium text-gray-700">[Ingles]</p>
+                    </div>
+                     <div class="text-center p-4">
+                         <div class="bg-green-100 rounded-full p-4 inline-block mb-2 text-green-600">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                         </div>
+                         <p class="font-medium text-gray-700">[Inteligencia artificial]</p>
+                    </div>
+                     <div class="text-center p-4">
+                         <div class="bg-green-100 rounded-full p-4 inline-block mb-2 text-green-600">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                         </div>
+                         <p class="font-medium text-gray-700">[Animales]</p>
+                    </div>
+                    <div class="text-center p-4">
+                         <div class="bg-green-100 rounded-full p-4 inline-block mb-2 text-green-600">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                         </div>
+                         <p class="font-medium text-gray-700">[Música]</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 mt-10 max-w-lg mx-auto fade-in" style="transition-delay: 0.3s;">Creo que encontrar el equilibrio en todos los aspectos de la vida es fundamental, ¡y la alimentación es una pieza clave!</p>
+            </div>
+        </section>
+
+<section id="contact" class="py-20 md:py-32 px-6 bg-gradient-to-r from-green-500 to-teal-600 text-white text-center">
+            <div class="container mx-auto fade-in">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">¿Listo/a para Trabajar Juntos?</h2>
+                <p class="text-lg md:text-xl mb-8 max-w-xl mx-auto"> Si buscas un enfoque personalizado y empático para mejorar tu nutrición y bienestar, ¡estoy aquí para ayudarte!</p>
+                <a href="https://wa.link/a5i020" class="bg-white hover:bg-gray-100 text-green-600 font-bold py-3 px-8 rounded-full text-lg transition duration-300 shadow-lg transform hover:scale-105">Contáctame</a>
+                </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-10 px-6">
+        <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
+            <p class="text-sm mb-4 md:mb-0">&copy; 2025 Cristian Urizar. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://www.facebook.com/people/Nutriologo-Cristian-Urizar/100072225924082/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">Facebook</a>
+                <a href="#" class="hover:text-white transition duration-300">Instagram</a>
+                <a href="#" class="hover:text-white transition duration-300">LinkedIn</a>
+            </div>
+            <div class="mt-4 md:mt-0 text-sm">
+                 <a href="#" class="hover:text-white transition duration-300 mr-4">Política de Privacidad</a>
+                 <a href="#" class="hover:text-white transition duration-300">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // Menú Móvil Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = mobileMenu.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('svg');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>';
+            }
+        });
+
+        // Cerrar menú móvil al hacer clic en un enlace
+        navLinks.forEach(link => {
+             // Cerrar si el enlace no es a otra página completa (ej. #contact)
+            if (!link.href.includes('.html') || link.href.includes('#')) {
+                 link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuButton.querySelector('svg');
+                    icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>';
+                });
+            }
+        });
+
+        // Animación Fade-in al hacer scroll
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        fadeInElements.forEach(el => { observer.observe(el); });
+    </script>
+
+<a href="https://wa.link/a5i020" target="_blank" rel="noopener noreferrer"
+   class="whatsapp-float"
+   aria-label="Contactar por WhatsApp"
+   title="Contactar por WhatsApp">  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="whatsapp-icon" role="img" aria-hidden="true" focusable="false"> <path fill="currentColor" fill-rule="evenodd" d="M16.002 0a16 16 0 0 0-16 16c0 3.09.88 6 2.459 8.519l-2.491 6.03 6.269-2.434a15.93 15.93 0 0 0 7.76 1.885h.004a16 16 0 1 0-16-16zm7.995 23.213c-.398-.2-2.362-1.164-2.728-1.297-.366-.133-.633-.2-.9.2-.266.399-1.03 1.297-1.264 1.563-.234.266-.468.3-.867.1-.398-.2-1.686-.62-3.21-1.977-1.186-1.057-1.977-2.362-2.21-2.761-.234-.399-.025-.612.174-.811.175-.174.399-.467.598-.7.2-.233.266-.399.399-.665.133-.266.067-.5-.033-.7-.1-.2-1.03-2.495-1.429-3.422-.374-.895-.754-.772-.9-.787-.145-.015-.313-.015-.48-.015-.167 0-.433.067-.667.332-.233.266-.895.868-1.129 2.109-.234 1.242.167 2.597.334 2.83.166.234 1.494 2.495 3.619 4.491 2.125 1.996 2.83 2.261 3.793 2.56 1.19.374 1.978.3 2.495.166.574-.15 1.712-.7 1.946-1.364.234-.665.234-1.23.167-1.364-.067-.133-.234-.2-.5-.399z"></path>
+    </svg>
+</a>
+
+</body>
+</html>
