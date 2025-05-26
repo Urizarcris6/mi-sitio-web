@@ -117,10 +117,62 @@
             box-shadow: 4px 4px 10px rgba(0,0,0,0.4); 
         }
         .whatsapp-icon {
-            width: 32px;  
+            width: 32px;   
             height: 32px; 
             fill: white; 
         }
+
+        /* Estilos para FAQ (NUEVO) */
+        .faq-item summary {
+            font-weight: 600;
+            color: #1f2937; /* text-gray-800 */
+            padding: 1rem;
+            background-color: #f9fafb; /* bg-gray-50 */
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-item summary:hover {
+            background-color: #f3f4f6; /* bg-gray-100 */
+        }
+        .faq-item summary::-webkit-details-marker {
+            display: none; /* Hide default arrow in Chrome/Safari */
+        }
+        .faq-item summary::after { /* Custom arrow */
+            content: '+';
+            font-size: 1.5rem;
+            color: #059669; /* text-green-600 */
+            transition: transform 0.2s ease;
+        }
+        .faq-item[open] summary::after {
+            transform: rotate(45deg);
+        }
+        .faq-item div { /* Content of the details */
+            padding: 1rem;
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            background-color: white;
+        }
+        .faq-item div p, .faq-item div ul {
+            color: #4b5563; /* text-gray-600 */
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .faq-item div ul {
+            list-style-type: disc;
+            margin-left: 1.25rem;
+            margin-top: 0.5rem;
+        }
+         .faq-item div li {
+            margin-bottom: 0.25rem;
+        }
+        /* Fin Estilos para FAQ (NUEVO) */
+
         @media (max-width: 768px) {
             .service-card-image {
                 height: 180px; /* Altura ajustada para móviles */
@@ -138,10 +190,17 @@
             .service-card h3 {
                 font-size: 1.5rem; 
             }
+            /* Responsive adjustments for FAQ (NUEVO) */
+            .faq-item summary {
+                font-size: 1rem; 
+            }
+            .faq-item div p, .faq-item div ul {
+                 font-size: 0.9rem; 
+            }
+            /* Fin Responsive adjustments for FAQ (NUEVO) */
         }
     </style>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N7D6L9C8KV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -152,7 +211,6 @@
 </script>
 
 
-<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -168,8 +226,6 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1177998180742228&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
-
 </head>
 <body class="bg-gray-50 text-gray-800">
 
@@ -225,7 +281,7 @@ src="https://www.facebook.com/tr?id=1177998180742228&ev=PageView&noscript=1"
                             <div class="service-card-content">
                                 <div class="icon-container mx-auto md:mx-0"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                                    </svg>                              
+                                    </svg>                                 
                                 </div>
                                 <h3>Planes Personalizados y App de Nutrición</h3>
                                 <p class="mb-4">Todo integrado y fácil de usar desde nuestra app de nutrición, diseñada para acompañarte en cada paso de tu transformación.</p>
@@ -250,7 +306,7 @@ src="https://www.facebook.com/tr?id=1177998180742228&ev=PageView&noscript=1"
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.287 8.287 0 0 0 3-2.553A8.252 8.252 0 0 1 15.362 5.214Z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 9.75A8.25 8.25 0 0 1 12 4.5v12A8.25 8.25 0 0 1 4.5 9.75Z" />
-                                    </svg>                              
+                                    </svg>                                 
                                 </div>
                                 <h3>Sesiones en Vivo de Activación Funcional</h3>
                                 <p class="sub-headline">Quema calorías, aumenta tu fuerza y mejora tu condición física desde la comodidad de tu casa.</p>
@@ -272,7 +328,7 @@ src="https://www.facebook.com/tr?id=1177998180742228&ev=PageView&noscript=1"
                                 <div class="icon-container mx-auto md:mx-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L21 5.25l-.813 2.846a4.5 4.5 0 0 0-3.09 3.09L14.25 12l2.846.813a4.5 4.5 0 0 0 3.09 3.09L21 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L14.25 12Z" />
-                                    </svg>                              
+                                    </svg>                                 
                                 </div>
                                 <h3>Sesiones de Motivación Psicológica</h3>
                                 <p class="sub-headline">Aumenta tu determinación y mantén el enfoque para lograr tus objetivos con el apoyo de una psicóloga especialista en psicología de la alimentación.</p>
@@ -290,6 +346,93 @@ src="https://www.facebook.com/tr?id=1177998180742228&ev=PageView&noscript=1"
             </div>
         </section>
 
+        <section class="py-16 md:py-24 px-6 bg-gray-100 fade-in">
+            <div class="container mx-auto">
+                <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-green-600 mb-4">Preguntas Frecuentes</h2>
+                    <p class="text-xl text-gray-700">Encuentra respuestas a las dudas más comunes sobre mis servicios de nutrición.</p>
+                </div>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <details class="faq-item group">
+                        <summary class="text-lg">¿Qué modalidades de consulta nutricional ofrecen?</summary>
+                        <div>
+                            <p>Ofrezco dos modalidades para adaptarme a tus necesidades: consulta nutricional presencial y consulta nutricional en línea. Ambas incluyen nuestros beneficios completos como la app de nutrición, acceso a sesiones de activación física y apoyo psicológico.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="text-lg">¿Cómo funciona la consulta nutricional presencial?</summary>
+                        <div>
+                            <p>La consulta presencial se realiza exclusivamente en el municipio de San Lorenzo Chiautzingo, Puebla. El proceso es:</p>
+                            <ul>
+                                <li>Me contactas por WhatsApp.</li>
+                                <li>Te envío un formulario para conocer tus datos y agilizar la consulta.</li>
+                                <li>Agendamos una visita directamente en tu casa.</li>
+                                <li>Durante la visita, realizaremos la evaluación y te entregaré tu tratamiento nutricional personalizado junto con el acceso a la app de nutrición.</li>
+                            </ul>
+                            <p class="mt-2">El costo de la consulta presencial es de <strong>$300 MXN</strong>.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="text-lg">¿Cómo funciona la consulta nutricional en línea?</summary>
+                        <div>
+                            <p>La consulta en línea te permite recibir asesoría desde cualquier lugar. El proceso es:</p>
+                            <ul>
+                                <li>Me contactas por WhatsApp.</li>
+                                <li>Te envío un formulario para que me proporciones tus datos.</li>
+                                <li><strong>Importante:</strong> Antes de nuestra consulta, necesitarás tener a la mano tu peso y estatura actual.</li>
+                                <li>Acordamos un día y hora para conectarnos por videollamada.</li>
+                                <li>Durante la sesión en línea, crearemos tus planes de alimentación y te daré acceso a tu app de nutrición.</li>
+                            </ul>
+                            <p class="mt-2">El costo de la consulta en línea es de <strong>$250 MXN</strong>.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="text-lg">¿Cuáles son las principales diferencias entre la consulta presencial y en línea?</summary>
+                        <div>
+                            <p>La principal diferencia es el formato: la consulta presencial es una visita a tu domicilio (solo en San Lorenzo Chiautzingo, Puebla), mientras que la consulta en línea se realiza mediante videollamada. Para la consulta en línea, es necesario que tú mismo/a proporciones tu peso y estatura actual. Ambas modalidades ofrecen el mismo nivel de personalización en tu plan y acceso a todos los beneficios de la app.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="text-lg">¿Qué costo tienen las consultas?</summary>
+                        <div>
+                            <p>La consulta presencial tiene un costo de <strong>$300 MXN</strong> y la consulta en línea tiene un costo de <strong>$250 MXN</strong>.</p>
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="text-lg">¿Qué métodos de pago aceptan?</summary>
+                        <div>
+                            <p>Acepto pagos mediante transferencia electrónica y también con tarjetas de crédito y débito. Te proporcionaré los detalles al momento de agendar tu consulta.</p>
+                             <div class="flex items-center space-x-3 mt-3">
+                                <svg class="w-8 h-8 text-gray-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"></path></svg>
+                                <span class="text-gray-600">Tarjetas de Crédito/Débito</span>
+                            </div>
+                            <div class="flex items-center space-x-3 mt-2">
+                                 <svg class="w-8 h-8 text-gray-600" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L1 5v2h2v10H1v2h22v-2h-2V7h2V5L12 1zm-1 17H5V7h6v11zm2 0V7h6v11h-6zm7-13H2V5.618L12 2.27l10 3.348V5z"></path></svg>
+                                <span class="text-gray-600">Transferencia Electrónica</span>
+                            </div>
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="text-lg">¿Qué beneficios están incluidos en mis consultas?</summary>
+                        <div>
+                            <p>Todas nuestras consultas, tanto presenciales como en línea, incluyen un acompañamiento integral para tu bienestar:</p>
+                            <ul>
+                                <li><strong>Planes Personalizados y App de Nutrición:</strong> Acceso individual a tu perfil en la app (disponible para Android e iOS), planes de alimentación visuales y fáciles de seguir, monitoreo de tus avances (peso, % de grasa, % de músculo, circunferencia de cintura y cadera), y la posibilidad de compartir fotos de tus alimentos con tu nutriólogo a través de la app para un seguimiento cercano.</li>
+                                <li><strong>Sesiones en Vivo de Activación Funcional:</strong> Acceso a 7 sesiones variadas por día, de lunes a viernes, directamente desde tu app de nutrición. Quema calorías (aprox. 300 kcal en 30 min por sesión) y mejora tu condición física con entrenadores certificados.</li>
+                                <li><strong>Sesiones de Motivación Psicológica:</strong> Participa en 3 sesiones grupales en vivo por día, de lunes a viernes, accesibles desde tu app. Estas sesiones son guiadas por una psicóloga especialista en psicología de la alimentación y te ayudarán a mantenerte motivado(a).</li>
+                            </ul>
+                        </div>
+                    </details>
+                    <details class="faq-item group">
+                        <summary class="text-lg">¿Cómo puedo agendar mi primera consulta?</summary>
+                        <div>
+                            <p>¡Es muy fácil! Simplemente contáctame a través del botón de WhatsApp que encontrarás en la página o en el menú. Te guiaré en los siguientes pasos para comenzar tu transformación.</p>
+                            <a href="https://wa.link/a5i020" target="_blank" rel="noopener noreferrer" class="inline-block mt-4 bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-full transition duration-300 shadow transform hover:scale-105">Contactar por WhatsApp</a>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
         <section class="py-16 md:py-24 px-6 bg-gradient-to-r from-green-500 to-teal-600 text-white text-center">
             <div class="container mx-auto fade-in">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Tienes Preguntas o Quieres Empezar?</h2>
@@ -303,7 +446,7 @@ src="https://www.facebook.com/tr?id=1177998180742228&ev=PageView&noscript=1"
         <div class="container mx-auto text-center md:flex md:justify-between md:items-center">
             <p class="text-sm mb-4 md:mb-0">&copy; 2025 Cristian Urizar. Todos los derechos reservados.</p>
             <div class="flex justify-center space-x-4">
-            <a href="https://www.facebook.com/people/Nutriologo-Cristian-Urizar/100072225924082/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">Facebook</a>                <a href="#" class="hover:text-white transition duration-300" aria-label="Instagram">Instagram</a>
+            <a href="https://www.facebook.com/people/Nutriologo-Cristian-Urizar/100072225924082/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition duration-300">Facebook</a>            <a href="#" class="hover:text-white transition duration-300" aria-label="Instagram">Instagram</a>
                 <a href="#" class="hover:text-white transition duration-300" aria-label="LinkedIn">LinkedIn</a>
             </div>
             <div class="mt-4 md:mt-0 text-sm">
